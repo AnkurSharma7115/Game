@@ -47,6 +47,14 @@ button {
   cursor: pointer;
   margin: 0.5rem;
 }
+button:disabled,
+button[disabled]{
+  cursor: not-allowed;
+        pointer-events: none;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
 
 button:focus {
   outline: none;
