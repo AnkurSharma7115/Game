@@ -47,8 +47,9 @@ function setPlayerHealth(health) {
 // JavaScript Code for Executing Game Fnctions
 
 const PLAYER_ATTACK_VALUE = 10;
-const MONSTER_ATTACK_VALUE = 12;
+const MONSTER_ATTACK_VALUE = 14;
 
+const PLAYER_STRONG_ATTACK = 16; //chance to attack on Monster
 
 let chosenMaxLife = 100;
 
@@ -57,10 +58,22 @@ let currentPlayerHealth = chosenMaxLife;
 
 adjustHealthBars(chosenMaxLife);
 
-function attackHandler(){
-  const monsterDamage = dealMonsterDamage(PLAYER_ATTACK_VALUE);
+  //creating function to dealing special attacks on Monster
+function attackWithChance(attackMode){
+
+  let damageOnMonster;
+  
+  //special case for Attack on Moster
+  if(attackMode === "ATTACK"){
+    damageOnMonster = PLAYER_ATTACK_VALUE;
+  }else if(attackMode === "STRONG_ATTACK"){
+    damageOnMonster = PLAYER_STRONG_ATTACK;
+  }
+
+  const monsterDamage = dealMonsterDamage(damageOnMonster);
   currentMosnterHealth = currentMosnterHealth - monsterDamage;
   
+  //attack on Player remains normal
   const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);  
   currentPlayerHealth = currentPlayerHealth - playerDamage;
 
@@ -73,4 +86,13 @@ function attackHandler(){
   }
 }
 
+function attackHandler(){
+  attackWithChance("ATTACK");
+}
+
+function strongAttackHandler(){
+  attackWithChance("STRONG_ATTACK");
+}
+
 attackBtn.addEventListener("click", attackHandler);
+strongAttackBtn.addEventListener("click", strongAttackHandler);
