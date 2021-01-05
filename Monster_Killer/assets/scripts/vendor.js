@@ -47,9 +47,11 @@ function setPlayerHealth(health) {
 // JavaScript Code for Executing Game Fnctions
 
 const PLAYER_ATTACK_VALUE = 10;
-const MONSTER_ATTACK_VALUE = 14;
+const MONSTER_ATTACK_VALUE = 15;
 
-const PLAYER_STRONG_ATTACK = 16; //chance to attack on Monster
+const PLAYER_STRONG_ATTACK = 17; //chance to attack on Monster
+
+const HEAL_VALUE = 20
 
 let chosenMaxLife = 100;
 
@@ -58,22 +60,8 @@ let currentPlayerHealth = chosenMaxLife;
 
 adjustHealthBars(chosenMaxLife);
 
-  //creating function to dealing special attacks on Monster
-function attackWithChance(attackMode){
-
-  let damageOnMonster;
-  
-  //special case for Attack on Moster
-  if(attackMode === "ATTACK"){
-    damageOnMonster = PLAYER_ATTACK_VALUE;
-  }else if(attackMode === "STRONG_ATTACK"){
-    damageOnMonster = PLAYER_STRONG_ATTACK;
-  }
-
-  const monsterDamage = dealMonsterDamage(damageOnMonster);
-  currentMosnterHealth = currentMosnterHealth - monsterDamage;
-  
-  //attack on Player remains normal
+// attack on Player by Monster
+function attackOnPlayer(){
   const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);  
   currentPlayerHealth = currentPlayerHealth - playerDamage;
 
@@ -86,13 +74,51 @@ function attackWithChance(attackMode){
   }
 }
 
+  //creating function to dealing special attacks on Monster
+function attackWithChance(attackMode){
+            let damageOnMonster;
+            
+            //special case for Attack on Moster
+            if(attackMode === "ATTACK"){
+              damageOnMonster = PLAYER_ATTACK_VALUE;
+            }else if(attackMode === "STRONG_ATTACK"){
+              damageOnMonster = PLAYER_STRONG_ATTACK;
+            }
+
+            const monsterDamage = dealMonsterDamage(damageOnMonster);
+            currentMosnterHealth = currentMosnterHealth - monsterDamage;
+            
+            //attack on Player remains normal
+            attackOnPlayer();
+}
+
 function attackHandler(){
   attackWithChance("ATTACK");
 }
 
+// special attack on Monster
 function strongAttackHandler(){
   attackWithChance("STRONG_ATTACK");
 }
 
+ //heal Player along with Monster Attack
+function healPlayerHandler(){
+  let healVal=0;
+  if(currentPlayerHealth === chosenMaxLife)
+  {
+    alert("Max. Initial Health Reached!!");
+  }else if(currentPlayerHealth >= chosenMaxLife - HEAL_VALUE){
+    alert("You can't heal more than max. initial health");
+    healVal = chosenMaxLife - currentPlayerHealth;
+  }else{
+    healVal = HEAL_VALUE;
+  }
+  increasePlayerHealth(healVal);
+  currentPlayerHealth = currentPlayerHealth + healVal;
+  attackOnPlayer();
+  
+}
+
 attackBtn.addEventListener("click", attackHandler);
-strongAttackBtn.addEventListener("click", strongAttackHandler);
+strongAttackBtn.addEventListener("click", strongAttackHandler); 
+healBtn.addEventListener("click", healPlayerHandler);
