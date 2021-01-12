@@ -47,7 +47,7 @@ function setPlayerHealth(health) {
 // JavaScript Code for Executing Game Fnctions
 
 const PLAYER_ATTACK_VALUE = 10;
-const MONSTER_ATTACK_VALUE = 12;
+const MONSTER_ATTACK_VALUE = 14;
 
 const PLAYER_STRONG_ATTACK = 17; //chance to attack on Monster
 
@@ -72,12 +72,12 @@ function attackOnPlayer(){
   if(currentPlayerHealth <= 0 && hasBonusLife)
   {
     console.log("Your current Health of Player" + currentPlayerHealth);
-    healingHealth = currentPlayerHealth + HEAL_VALUE;
+    
     alert("You're Loosing!! Bonus Heal will be Used Now");
     hasBonusLife = false;
     removeBonusLife();
-    setPlayerHealth(healingHealth);
-    currentPlayerHealth = healingHealth;
+    setPlayerHealth(HEAL_VALUE);
+    currentPlayerHealth = HEAL_VALUE;
     healBtn.disabled = true;
   }
 
@@ -106,6 +106,7 @@ function attackWithChance(attackMode){
             
             //attack on Player remains normal
             attackOnPlayer();
+            
 }
 
 function attackHandler(){
