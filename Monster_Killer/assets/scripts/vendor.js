@@ -107,6 +107,12 @@ function attackWithChance(attackMode){
             //attack on Player remains normal
             attackOnPlayer();
             
+            //Reload
+            if((currentPlayerHealth <= 0 && hasBonusLife === false) || currentMosnterHealth <=0)
+            {
+              window.location.href = window.location.href ; 
+            }
+            
 }
 
 function attackHandler(){
