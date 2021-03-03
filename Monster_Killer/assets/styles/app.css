@@ -16,7 +16,7 @@ progress {
   -moz-appearance: none;
   appearance: none;
   width: 80%;
-  height: 2rem;
+  height: 1rem;
   color: #ff0062;
   border: 1px solid #a927f5;
 }
@@ -28,11 +28,6 @@ progress[value] {
 }
 
 progress[value]::-webkit-progress-value {
-  background-color: #a927f5;
-  transition: all 0.2s ease-out;
-}
-
-progress[value]::-moz-progress-bar {
   background-color: #a927f5;
   transition: all 0.2s ease-out;
 }
@@ -68,7 +63,7 @@ button:active {
 
 #health-levels,
 #controls {
-  margin: 2rem auto;
+  margin: 1rem auto;
   width: 30rem;
   text-align: center;
   border-radius: 10px;
@@ -91,4 +86,33 @@ button:active {
   border-radius: 10px;
   text-align: center;
   margin: 0 0.5rem;
+}
+footer{
+  background-color: white;
+  text-align: center;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  width: 30rem;
+  border-radius: 10px;
+  padding: 0 1rem;
+  
+}
+
+.fa {
+
+  font-size: 50px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  background: black;
+}
+
+.fa:hover {
+   color: black;
+   background-color : white;
+}
+
+.fa-github {
+  
+  color: white;
 }
